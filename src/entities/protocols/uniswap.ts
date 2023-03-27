@@ -1,6 +1,6 @@
 import JSBI from 'jsbi'
 import { RoutePlanner, CommandType } from '../../utils/routerCommands'
-import { Trade as V2Trade, Pair } from '@uniswap/v2-sdk'
+import { Trade as V2Trade, Pair } from '@totality-fi/v1-sdk'
 import { Trade as V3Trade, Pool, encodeRouteToPath } from '@uniswap/v3-sdk'
 import {
   Trade as RouterTrade,
@@ -15,7 +15,7 @@ import {
   getOutputOfPools,
   encodeMixedRouteToPath,
   partitionMixedRouteByProtocol,
-} from '@uniswap/router-sdk'
+} from '@totality-fi/router-sdk'
 import { Permit2Permit } from '../../utils/inputTokens'
 import { Currency, TradeType, CurrencyAmount, Percent } from '@uniswap/sdk-core'
 import { Command, RouterTradeType, TradeConfig } from '../Command'
@@ -148,13 +148,13 @@ function addV3Swap<TInput extends Currency, TOutput extends Currency>(
   routerMustCustody: boolean
 ): void {
   const trade = V3Trade.createUncheckedTrade({
-    route: route as RouteV3<TInput, TOutput>,
+    route: route as unknown as RouteV3<TInput, TOutput>,
     inputAmount,
     outputAmount,
     tradeType,
   })
 
-  const path = encodeRouteToPath(route as RouteV3<TInput, TOutput>, trade.tradeType === TradeType.EXACT_OUTPUT)
+  const path = encodeRouteToPath(route as unknown as RouteV3<TInput, TOutput>, trade.tradeType === TradeType.EXACT_OUTPUT)
   if (tradeType == TradeType.EXACT_INPUT) {
     planner.addCommand(CommandType.V3_SWAP_EXACT_IN, [
       routerMustCustody ? ROUTER_AS_RECIPIENT : options.recipient,

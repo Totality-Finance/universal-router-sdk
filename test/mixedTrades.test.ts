@@ -8,7 +8,7 @@ import { looksRareOrders, createLooksRareOrders } from './orders/looksRare'
 import { SeaportTrade } from '../src/entities/protocols/seaport'
 import { seaportDataETH } from './orders/seaport'
 import { TokenType } from '../src/entities/NFTTrade'
-import { Trade as V2Trade, Route as RouteV2, Pair } from '@uniswap/v2-sdk'
+import { Trade as V2Trade, Route as RouteV2, Pair } from '@totality-fi/v1-sdk'
 import { Trade as V3Trade, Route as RouteV3, Pool } from '@uniswap/v3-sdk'
 import { generatePermitSignature, makePermit } from './utils/permit2'
 
